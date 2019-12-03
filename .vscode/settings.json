@@ -1,0 +1,12 @@
+{
+  "eslint.options": {
+
+  },
+  "htmlhint.options": {
+    "attr-lowercase":false
+  },
+  "jshint.options": {
+
+  },
+  "typescript.tsdk": "node_modules/typescript/lib",
+}

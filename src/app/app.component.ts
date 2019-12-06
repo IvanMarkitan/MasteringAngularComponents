@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TaskService } from './tasks/task.service';
 
 @Component({
   selector: 'mac-root',
@@ -6,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'MasteringAngularComponents';
+  title = 'Mastering Angular Components';
+
+  constructor() {
+
+  }
+
 }

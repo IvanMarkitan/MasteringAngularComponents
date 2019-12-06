@@ -1,8 +1,6 @@
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, OnInit, ViewEncapsulation, Input, Output, EventEmitter, ChangeDetectionStrategy } from "@angular/core";
 import { Task, TaskListFilterType } from "src/app/model";
-import { TaskService } from "../task.service";
-import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: "mac-task-list",
@@ -11,53 +9,25 @@ import { filter, map } from 'rxjs/operators';
   encapsulation: ViewEncapsulation.None
 })
 export class TaskListComponent implements OnInit {
-  tasks: Observable<Task[]>;
-  filteredTasks: Observable<Task[]>;
-  taskFilterTypes: TaskListFilterType[] = ["all", "open", "done", "none"];
-  activeTaskFilterType = new BehaviorSubject<TaskListFilterType>('all');
-
-  constructor(private taskService: TaskService) {
-    this.tasks = taskService.getTasks();
-    this.filterTasks();
-  }
+  @Input() taskFilterTypes: TaskListFilterType[];
+  @Input() activeTaskFilterType: TaskListFilterType;
+  @Input() tasks: Task[];
+  @Output() outAddTask = new EventEmitter<string>();
+  @Output() outActivateFilterType = new EventEmitter<TaskListFilterType>();
+  @Output() outUpdateTask = new EventEmitter<Task>();
 
   addTask(title: string) {
-    const task: Task = {
-      title,
-      done: false
-    };
-    this.taskService.addTask(task);
-    this.tasks = this.taskService.getTasks();
+    this.outAddTask.emit(title);
   }
 
   updateTask(task: Task) {
-    this.taskService.updateTask(task);
-    this.tasks = this.taskService.getTasks();
+    this.outUpdateTask.emit(task);
   }
 
-  activateFilterType(typeName: TaskListFilterType) {
-    this.activeTaskFilterType.next(typeName);
+  activateFilterType(tlfType: TaskListFilterType) {
+    this.outActivateFilterType.emit(tlfType);
   }
 
-  filterTasks() {
-    let start = 0;
-    this.filteredTasks = combineLatest([this.tasks, this.activeTaskFilterType])
-      .pipe(
-        map(([tasks, activateFilterType]) => {
-          return tasks.filter((task) => {
-            if (activateFilterType === "all") {
-              return true;
-            } else if (activateFilterType === "open") {
-              return !task.done;
-            } else if (activateFilterType === "done") {
-              return task.done;
-            } else {
-              return false;
-            }
-          });
-
-        }));
-  }
 
   ngOnInit() { }
 }

@@ -11,8 +11,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { Database } from './database';
 import { TaskListContainerComponent } from './container/task-list-container/task-list-container.component';
-import { ProjectComponent } from './project/project/project.component';
 import { ProjectContainerComponent } from './container/project-container/project-container.component';
+import { TabsComponent } from './ui/tabs/tabs/tabs.component';
+import { ProjectComponent } from './project/project/project.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ProjectContainerComponent } from './container/project-container/project
     ToggleComponent,
     TaskListContainerComponent,
     ProjectComponent,
-    ProjectContainerComponent
+    ProjectContainerComponent,
+    TabsComponent
   ],
   imports: [
     BrowserModule,

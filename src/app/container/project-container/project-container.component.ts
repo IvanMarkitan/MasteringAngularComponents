@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Project } from '../../model';
+import { Project, Tab } from '../../model';
 import { ProjectService } from '../../project/project.service';
 
 @Component({
@@ -12,8 +12,19 @@ import { ProjectService } from '../../project/project.service';
 })
 export class ProjectContainerComponent {
   selectedProject: Observable<Project>;
+  tabs: Tab[] = [
+    {id: 'tasks', title: 'Tasks'},
+    {id: 'comments', title: 'Comments'},
+    {id: 'activities', title: 'Activities'}
+  ];
+  activeTab: Tab = this.tabs[0];
 
   constructor(private projectService: ProjectService) {
     this.selectedProject = projectService.getSelectedProject();
   }
+
+  activateTab(tab: Tab) {
+    this.activeTab = tab;
+  }
+
 }

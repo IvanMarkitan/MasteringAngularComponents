@@ -12,3 +12,8 @@ export interface Project {
   readonly title: string;
   readonly description: string;
 }
+
+export interface Tab {
+  readonly id: any;
+  readonly title: string;
+}

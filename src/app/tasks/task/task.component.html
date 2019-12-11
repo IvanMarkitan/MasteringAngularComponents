@@ -1,3 +1,9 @@
 <mac-checkbox [checked]="task.done"
               (outCheck)="updateTask($event)"></mac-checkbox>
-<div class="title">{{task.title}}</div>
+<div class="title">
+  <mac-editor
+  [content]="task.title"
+  [showControls]=true
+  (outSaveEdit)="updateTask($event)"
+  ></mac-editor>
+</div>

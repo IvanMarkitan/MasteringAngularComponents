@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { TaskService } from './tasks/task.service';
-import { interval, from } from 'rxjs';
-import { constructor } from 'q';
-import { switchMap, take } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { Project } from './model';
+import { ProjectService } from './project/project.service';
 
 @Component({
   selector: 'mac-root',
@@ -11,13 +10,16 @@ import { switchMap, take } from 'rxjs/operators';
 })
 export class AppComponent {
   title = 'Mastering Angular Components';
-  o1 = interval(1000);
-  o2 = from(['a', 'b']);
+  projects: Observable<Project[]>;
+  selectedProject: Observable<Project>;
 
+  constructor(private projectService: ProjectService) {
+    this.projects = projectService.getProjects();
+    this.selectedProject = this.projectService.getSelectedProject();
+  }
 
-
-  constructor() {
-
+  selectProject(id: number) {
+    this.projectService.selectProject(id);
   }
 
 }

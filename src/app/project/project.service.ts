@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Project } from '../model';
 
+
 @Injectable({ providedIn: 'root' })
 export class ProjectService {
   private projects = new BehaviorSubject<Project[]>([]);
@@ -32,4 +33,8 @@ export class ProjectService {
   getSelectedProject() {
     return this.selectedProject;
   }
+  getProjects(): Observable<Project[]> {
+    return this.projects;
+  }
+
 }

@@ -14,7 +14,7 @@ import { ProjectService } from 'src/app/project/project.service';
 export class TaskListContainerComponent {
   tasks: Observable<Task[]>;
   filteredTasks: Observable<Task[]>;
-  taskFilterTypes: TaskListFilterType[] = ['all', 'open', 'done', 'none'];
+  taskFilterTypes: TaskListFilterType[] = ['all', 'open', 'done'];
   activeTaskFilterType = new BehaviorSubject<TaskListFilterType>('all');
   selectedProject: Observable<Project>;
 

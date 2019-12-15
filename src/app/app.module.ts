@@ -18,6 +18,12 @@ import { NavigationItemComponent } from './ui/navigation-item/navigation-item.co
 import { NavigationSectionComponent } from './ui/navigation-section/navigation-section.component';
 import { NavigationComponent } from './ui/navigation/navigation.component';
 import { EditorComponent } from './ui/editor/editor.component';
+import { ProfilePictureComponent } from './user/profile-picture/profile-picture.component';
+import { UserAreaComponent } from './user/user-area/user-area.component';
+import { FromNowPipe } from './pipes/from-now.pipe';
+import { CommentComponent } from './comments/comment/comment.component';
+import { CommentsComponent } from './comments/comments/comments.component';
+import { ProjectCommentsContainerComponent } from './container/project-comments-container/project-comments-container.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +40,13 @@ import { EditorComponent } from './ui/editor/editor.component';
     NavigationItemComponent,
     NavigationSectionComponent,
     NavigationComponent,
-    EditorComponent
+    EditorComponent,
+    ProfilePictureComponent,
+    UserAreaComponent,
+    FromNowPipe,
+    CommentComponent,
+    CommentsComponent,
+    ProjectCommentsContainerComponent
   ],
   imports: [
     BrowserModule,

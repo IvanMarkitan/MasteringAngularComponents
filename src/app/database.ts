@@ -1,14 +1,18 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
-import { Task, Project } from './model';
+import { Task, Project, User } from './model';
 
 export class Database implements InMemoryDbService {
 
   createDb() {
 
+    const users: User[] = [
+      { id: 1, name: 'Jason', pictureUrl: '/assets/ProfilePicture.png' }
+    ];
     const projects: Project[] = [
-      { id: 1, title: 'My first project', description: 'This is your first project.' },
-      { id: 2, title: 'My second project', description: 'This is your second project.' }
-      ,{id: 3, title: 'My third project', description: 'This is your third project.'}
+      { id: 1, title: 'My first project', description: 'This is your first project.',
+      comments: [{ content: 'My first comment', time: Date.now(), user: users[0] }] },
+      { id: 2, title: 'My second project', description: 'This is your second project.', comments: [] }
+      , { id: 3, title: 'My third project', description: 'This is your third project.', comments: [] }
 
     ];
 
@@ -24,6 +28,6 @@ export class Database implements InMemoryDbService {
       { id: 9, projectId: 3, title: 'Task 9', done: false },
       { id: 10, projectId: 3, title: 'Task 10', done: false }
     ];
-    return { projects, tasks };
+    return { users, projects, tasks };
   }
 }

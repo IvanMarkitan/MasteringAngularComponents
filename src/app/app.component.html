@@ -1,9 +1,8 @@
-<aside class="side-nav">
+<aside class="side-nav" style="box-shadow: inset  -9px 0 18px  rgb(105, 105, 105); border-right: 1px solid #07679e;">
+  <mac-user-area [user]="user | async" [openTasksCount]="openTasksCount | async"></mac-user-area>
   <mac-navigation>
     <mac-navigation-section title="Projects">
-      <mac-navigation-item *ngFor="let project of projects | async"
-        [navId]="project.id"
-        [title]="project.title"
+      <mac-navigation-item *ngFor="let project of projects | async" [navId]="project.id" [title]="project.title"
         [class.active]="project.id === (selectedProject | async).id"
         (outActivateNavigationItem)="selectProject($event)">
       </mac-navigation-item>

@@ -24,11 +24,19 @@ export class TaskComponent implements OnInit {
     return this.task && this.task.done;
   }
 
-  updateTask(done: boolean) {
+  onDone(done: boolean) {
+    this.task.done = done;
+    this.updateTask();
+  }
+
+  onSave(title: string) {
+    this.task.title = title;
+    this.updateTask();
+  }
+  updateTask() {
     this.outUpdateTask.emit({
-      ...this.task,
-      done
+      ...this.task
     });
   }
-  ngOnInit() {}
+  ngOnInit() { }
 }

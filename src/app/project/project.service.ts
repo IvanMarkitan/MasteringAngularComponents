@@ -36,5 +36,9 @@ export class ProjectService {
   getProjects(): Observable<Project[]> {
     return this.projects;
   }
+  updateProject(project: Project): void {
+    this.http.post<Project>(`/api/projects/${project.id}`, project)
+      .subscribe(() => this.loadProjects());
+  }
 
 }

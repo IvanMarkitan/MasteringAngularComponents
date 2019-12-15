@@ -11,7 +11,8 @@
             "url": "http://localhost:4202",
             "webRoot": "${workspaceFolder}",
             "disableNetworkCache": true,
-            "skipFiles": ["node_modules"]
+            "skipFiles": ["node_modules"],
+            "userDataDir": "${cwd}/.vscode/userDataDir"
         }
     ]
 }

@@ -7,7 +7,8 @@ import { Tab } from '../../../model';
 @Component({
   selector: 'mac-tabs',
   templateUrl: './tabs.component.html',
-  styleUrls: ['./tabs.component.css']
+  styleUrls: ['./tabs.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TabsComponent {
   @Input() tabs: Tab[];

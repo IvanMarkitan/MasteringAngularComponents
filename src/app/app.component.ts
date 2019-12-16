@@ -27,9 +27,9 @@ export class AppComponent {
 
   }
 
-  selectProject(id: number) {
-    this.projectService.selectProject(id);
-  }
+  // selectProject(id: number) {
+  //   this.projectService.selectProject(id);
+  // }
 
   getOpenTasks(): Observable<number> {
     return this.taskListService.getTasks().pipe(

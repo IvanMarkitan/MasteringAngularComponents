@@ -4,6 +4,8 @@ import { Task, TaskListFilterType, Project } from '../../model';
 import { Observable, combineLatest, BehaviorSubject } from 'rxjs';
 import { map, switchMap, take } from 'rxjs/operators';
 import { ProjectService } from 'src/app/project/project.service';
+import { Route } from '@angular/compiler/src/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'mac-task-list-container',
@@ -18,9 +20,11 @@ export class TaskListContainerComponent {
   activeTaskFilterType = new BehaviorSubject<TaskListFilterType>('all');
   selectedProject: Observable<Project>;
 
-  constructor(private taskService: TaskService, private projectService: ProjectService) {
+  constructor(private taskService: TaskService, private projectService: ProjectService, private route: ActivatedRoute) {
 
-    this.selectedProject = this.projectService.getSelectedProject();
+    this.selectedProject = combineLatest([projectService.getProjects(), route.parent.params]).pipe(
+      map(([projects, routeParams]) => projects.find(project => project.id === +routeParams.projectId))
+    );
 
     this.tasks = this.selectedProject.pipe(
       switchMap((project) => this.taskService.getProjectTasks(project.id))

@@ -26,9 +26,6 @@ export class ProjectService {
       .subscribe((projects) => this.projects.next(projects));
   }
 
-  selectProject(id: number) {
-    this.selectedProjectId.next(id);
-  }
 
   getSelectedProject() {
     return this.selectedProject;

@@ -6,6 +6,8 @@ import { map, switchMap, take } from 'rxjs/operators';
 import { ProjectService } from 'src/app/project/project.service';
 import { Route } from '@angular/compiler/src/core';
 import { ActivatedRoute } from '@angular/router';
+import { ActivitiesService } from 'src/app/activities/activities.service';
+import { limitWithEllipsis } from 'src/app/utilities/string-utilities';
 
 @Component({
   selector: 'mac-task-list-container',
@@ -20,9 +22,10 @@ export class TaskListContainerComponent {
   activeTaskFilterType = new BehaviorSubject<TaskListFilterType>('all');
   selectedProject: Observable<Project>;
 
-  constructor(private taskService: TaskService, private projectService: ProjectService, private route: ActivatedRoute) {
+  constructor(private taskService: TaskService, private projectService: ProjectService,
+    private route: ActivatedRoute, private activitiesService: ActivitiesService) {
 
-    this.selectedProject = combineLatest([projectService.getProjects(), route.parent.params]).pipe(
+    this.selectedProject = combineLatest([this.projectService.getProjects(), this.route.parent.params]).pipe(
       map(([projects, routeParams]) => projects.find(project => project.id === +routeParams.projectId))
     );
 
@@ -57,11 +60,17 @@ export class TaskListContainerComponent {
 
     this.selectedProject
       .pipe(take(1))
-      .subscribe((proj) => {
+      .subscribe((project) => {
         const task: Task = {
-          projectId: proj.id, title, done: false
+          projectId: project.id, title, done: false
         };
         this.taskService.addTask(task);
+        this.activitiesService.logProjectActivity(
+          project.id,
+          'tasks',
+          'A task was added',
+          `A new task "${limitWithEllipsis(title, 30)}" was added to #project-${project.id}.`
+        );
       });
 
 
@@ -74,5 +83,11 @@ export class TaskListContainerComponent {
 
   updateTask(task: Task) {
     this.taskService.updateTask(task);
+    this.activitiesService.logProjectActivity(
+      task.projectId,
+      'tasks',
+      'A task was updated',
+      `The task "${limitWithEllipsis(task.title, 30)}" was updated on #project-${task.projectId}.`
+    );
   }
 }

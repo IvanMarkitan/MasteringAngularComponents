@@ -36,3 +36,27 @@ export interface CommentUpdate {
   readonly index: number;
   readonly comment: Comment;
 }
+
+export type ActivityAlignment = 'left' | 'right';
+
+export interface ActivitySliderSelection {
+  start: number;
+  end: number;
+}
+
+export interface ActivityBase {
+  kind: string;
+  id?: number;
+  user: User;
+  time: number;
+  category: string;
+  title: string;
+  message: string;
+}
+
+export interface ProjectActivity extends ActivityBase {
+  kind: 'project';
+  projectId: number;
+}
+
+export type Activity = ProjectActivity;

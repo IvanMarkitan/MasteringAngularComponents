@@ -1,5 +1,5 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
-import { Task, Project, User } from './model';
+import { Task, Project, User, Activity } from './model';
 
 export class Database implements InMemoryDbService {
 
@@ -28,6 +28,38 @@ export class Database implements InMemoryDbService {
       { id: 9, projectId: 3, title: 'Task 9', done: false },
       { id: 10, projectId: 3, title: 'Task 10', done: false }
     ];
-    return { users, projects, tasks };
+
+    const now = +new Date();
+
+    const activities: Activity[] = [{
+      id: 1,
+      kind: 'project',
+      user: users[0],
+      time: now - 1000 * 60 * 60 * 7,
+      projectId: 1,
+      category: 'tasks',
+      title: 'A task was updated',
+      message: 'The task \'Task 1\' was updated on #project-1.'
+    }, {
+      id: 2,
+      kind: 'project',
+      user: users[0],
+      time: now - 1000 * 60 * 60 * 5,
+      projectId: 1,
+      category: 'tasks',
+      title: 'A task was updated',
+      message: 'The task \'Task 1\' was updated on #project-2.'
+    }, {
+      id: 3,
+      kind: 'project',
+      user: users[0],
+      time: now - 1000 * 60 * 60 * 1,
+      projectId: 1,
+      category: 'tasks',
+      title: 'A task was updated',
+      message: 'The task \'Task 2\' was updated on #project-2.'
+    }];
+
+    return { users, projects, tasks, activities };
   }
 }

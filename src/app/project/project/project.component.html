@@ -1,13 +1,8 @@
 <header class="header">
   <h2 class="title">{{project.title}}</h2>
   {{project.description}}
+  <mac-activity-slider></mac-activity-slider>
 </header>
-<mac-tabs [tabs]="tabs"
-          [activeTab]="activeTab"
-          (outActivateTab)="activateTab($event)">
+<mac-tabs [tabs]="tabs" [activeTab]="activeTab" (outActivateTab)="activateTab($event)">
 </mac-tabs>
 <router-outlet></router-outlet>
-<!-- <mac-task-list-container *ngIf="activeTab.id === 'tasks'">
-</mac-task-list-container>
-<mac-project-comments-container *ngIf="activeTab.id === 'comments'">
-</mac-project-comments-container> -->

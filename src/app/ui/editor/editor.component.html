@@ -1,5 +1,5 @@
 <div #editableContentElement class="editable-content" contenteditable="true"></div>
-<div class="output">{{content || '-'}}</div>
+<div class="output" [innerHTML]="content ? (content | tags | async): '-'"></div>
 <div *ngIf="showControls && !editMode" class="controls">
   <button (click)="beginEdit()" class="icon-edit"></button>
 </div>

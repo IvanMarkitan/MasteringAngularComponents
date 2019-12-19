@@ -5,3 +5,10 @@ export function limitWithEllipsis(str: string, limit: number): string {
     return str;
   }
 }
+
+export function replaceAll(
+  target: string,
+  search: string,
+  replacement: string): string {
+  return target.split(search).join(replacement);
+}

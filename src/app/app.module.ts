@@ -30,6 +30,7 @@ import { ActivitySliderComponent } from './activities/activity-slider/activity-s
 import { ActivityComponent } from './activities/activity/activity.component';
 import { ActivitiesComponent } from './activities/activities/activities.component';
 import { ProjectActivitiesContainerComponent } from './container/project-activities-container/project-activities-container.component';
+import { TagsPipe } from './pipes/tags.pipe';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { ProjectActivitiesContainerComponent } from './container/project-activit
     ActivitySliderComponent,
     ActivityComponent,
     ActivitiesComponent,
-    ProjectActivitiesContainerComponent
+    ProjectActivitiesContainerComponent,
+    TagsPipe
   ],
   imports: [
     BrowserModule,

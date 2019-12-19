@@ -19,6 +19,7 @@ export class ActivitySliderComponent implements OnChanges {
   timeLast: number;
   timeSpan: number;
   ticks: number[];
+  count = 0;
   selection: ActivitySliderSelection;
   modifySelection: boolean;
 
@@ -28,17 +29,20 @@ export class ActivitySliderComponent implements OnChanges {
     return this.elementRef.nativeElement.clientWidth - this.padding * 2;
   }
 
-  projectTime(time: number) {
+  projectTime(time: number) /*?*/ {
     const position = this.padding +
       (time - this.timeFirst) / this.timeSpan * this.totalWidth();
+    position /*?*/
     return position / this.elementRef.nativeElement.clientWidth * 100;
   }
 
   projectLength(length: number) {
-    return this.timeFirst + (length - this.padding) / this.totalWidth() * this.timeSpan;
+    return this.timeFirst + (length - this.padding) / this.totalWidth() * this.timeSpan; //?
   }
   @HostListener('mousedown', ['$event'])
   onMouseDown(event) {
+    console.clear();
+    this.count = 0;
     this.selection.start = this.selection.end = this.projectLength(event.offsetX);
     this.outSelectionChange.next(this.selection);
     this.modifySelection = true;
@@ -50,6 +54,8 @@ export class ActivitySliderComponent implements OnChanges {
   onMouseMove(event) {
     if (this.modifySelection) {
       this.selection.end = Math.max(this.selection.start, this.projectLength(event.offsetX));
+      console.log(`[${this.count++}] start: ${this.selection.start} - end: ${this.selection.end}`);
+
       this.outSelectionChange.next(this.selection);
       event.stopPropagation();
       event.preventDefault();

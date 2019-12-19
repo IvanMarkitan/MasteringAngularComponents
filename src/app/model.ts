@@ -60,3 +60,10 @@ export interface ProjectActivity extends ActivityBase {
 }
 
 export type Activity = ProjectActivity;
+
+export interface Tag {
+  type: string;
+  hashTag: string;
+  title: string;
+  link: string;
+}
